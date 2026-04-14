@@ -2,19 +2,19 @@
 
 This nightly-only library provides useful primitives for defining trait bounds
 
-[`eq`] and [`ne`] functions allow to check whether two types are equal in a `const` context
+[`eq`](https://docs.rs/trait-bounds/0.1.0/trait_bounds/fn.eq.html) and [`ne`](https://docs.rs/trait-bounds/0.1.0/trait_bounds/fn.ne.html) functions allow to check whether two types are equal in a `const` context
 
-[`type_id`] is similar to [`core::intrinsics::type_id`], but it can be used on [`PointeeSized`](https://doc.rust-lang.org/nightly/core/marker/trait.PointeeSized.html) types
+[`type_id`](https://docs.rs/trait-bounds/0.1.0/trait_bounds/fn.type_id.html) is similar to [`core::intrinsics::type_id`](https://doc.rust-lang.org/nightly/core/intrinsics/fn.type_id.html), but it can be used on [`PointeeSized`](https://doc.rust-lang.org/nightly/core/marker/trait.PointeeSized.html) types
 
-[`Assert<true>`] implements [`IsTrue`]
+[`Assert<true>`](https://docs.rs/trait-bounds/0.1.0/trait_bounds/struct.Assert.html) implements [`IsTrue`](https://docs.rs/trait-bounds/0.1.0/trait_bounds/trait.IsTrue.html)
 
-[`Assert<false>`] implements [`IsFalse`]
+[`Assert<false>`](https://docs.rs/trait-bounds/0.1.0/trait_bounds/struct.Assert.html) implements [`IsFalse`](https://docs.rs/trait-bounds/0.1.0/trait_bounds/trait.IsFalse.html)
 
-[`Is<T>`] is implemented for `U` if and only if `U` is equal to `T`
+[`Is<T>`](https://docs.rs/trait-bounds/0.1.0/trait_bounds/trait.Is.html) is implemented for `U` if and only if `U` is equal to `T`
 
-[`Not<T>`] is implemented for `U` if and only if `U` is not equal to `T`
+[`Not<T>`](https://docs.rs/trait-bounds/0.1.0/trait_bounds/trait.Not.html) is implemented for `U` if and only if `U` is not equal to `T`
 
-The [`Not`] trait can be used to define multiple blanket implementations, which is particularly useful with the [`From<T>`] trait,
+The [`Not`](https://docs.rs/trait-bounds/0.1.0/trait_bounds/trait.Not.html) trait can be used to define multiple blanket implementations, which is particularly useful with the [`From<T>`](https://doc.rust-lang.org/nightly/core/convert/trait.From.html) trait,
 as [`From<T> for T`](https://doc.rust-lang.org/nightly/core/convert/trait.From.html#impl-From%3CT%3E-for-T) often collides with user-defined blanket impls
 
 ```rust
