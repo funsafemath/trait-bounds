@@ -2,7 +2,7 @@
 name = "trait-bounds"
 version = "0.2.0"
 edition = "2024"
-description = "Trait bounds primitives using generic_const_exprs"
+description = "Trait bounds primitives using generic_const_exprs/generic_const_args"
 license = "MIT OR Apache-2.0"
 repository = "https://codeberg.org/funsafemath/trait-bounds"
 
