@@ -24,8 +24,11 @@
 #![no_std]
 #![expect(internal_features)]
 #![expect(incomplete_features)]
+#![cfg_attr(feature = "generic_const_exprs", feature(generic_const_exprs))]
+#![cfg_attr(feature = "generic_const_args", feature(min_generic_const_args))]
+#![cfg_attr(feature = "generic_const_args", feature(generic_const_args))]
+#![cfg_attr(feature = "generic_const_args", feature(generic_const_items))]
 #![feature(core_intrinsics)]
-#![feature(generic_const_exprs)]
 #![feature(fundamental)]
 #![feature(rustc_attrs)]
 #![feature(intrinsics)]
@@ -53,6 +56,12 @@ pub const fn ne<This, Other>() -> bool {
     !eq::<This, Other>()
 }
 
+// using just #[cfg(feature = "generic_const_args")] type const ... causes an error if generic_const_args isn't enabled, as it's a syntax extension
+#[cfg(feature = "generic_const_args")]
+mod generic_const_args;
+#[cfg(feature = "generic_const_args")]
+pub use generic_const_args::{EQ, NE};
+
 /// Implements [`IsTrue`] if and only if `COND` is `true`,
 /// implements [`IsFalse`] if and only if `COND` is `false`
 pub struct Assert<const COND: bool>;
@@ -75,4 +84,14 @@ impl<T> Is<T> for T {}
 /// [`Not<T>`] is implemented for `U` if and only if `U` is not equal to `T`
 #[fundamental]
 pub trait Not<T> {}
-impl<This, Other> Not<Other> for This where Assert<{ ne::<This, Other>() }>: IsTrue {}
+cfg_select! {
+    feature = "generic_const_exprs" => {
+        impl<This, Other> Not<Other> for This where Assert<{ ne::<This, Other>() }>: IsTrue {}
+    }
+    feature = "generic_const_args" => {
+        impl<This, Other> Not<Other> for This where Assert<{ NE::<This, Other> }>: IsTrue {}
+    }
+    _ => {
+        compile_error!("either generic_const_exprs or generic_const_args feature must be enabled");
+    }
+}

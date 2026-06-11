@@ -6,6 +6,10 @@ description = "Trait bounds primitives using generic_const_exprs"
 license = "MIT OR Apache-2.0"
 repository = "https://codeberg.org/funsafemath/trait-bounds"
 
+[features]
+generic_const_exprs = []
+generic_const_args = []
+
 [dependencies]
 
 [lints.clippy]
