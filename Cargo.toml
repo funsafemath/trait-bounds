@@ -7,8 +7,9 @@ license = "MIT OR Apache-2.0"
 repository = "https://codeberg.org/funsafemath/trait-bounds"
 
 [package.metadata.docs.rs]
-features = ["generic_const_args"]
-rustc-flags = ["-Znext-solver=globally"]
+features = [
+    "generic_const_exprs",
+] # generic_const_args currently causes ICE when using rustdoc
 
 [features]
 generic_const_exprs = []
